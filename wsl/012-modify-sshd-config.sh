@@ -67,7 +67,8 @@ else
         echo " "
         echo " "
 
-        sudo ssh-keygen -A
+        sudo /usr/bin/ssh-keygen -A
+        sudo /usr/bin/ssh-keygen -A
     else
         echo " "
         echo "Either you didn't answer, or you said no..."
