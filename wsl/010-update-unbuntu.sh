@@ -19,7 +19,7 @@ read -r -t $SECS -p "Do you want to update your system w/ the above commands? [y
 
 if [[ "$response" =~ ^(yes|y)$ ]]
 then
-    echo "You might be propmted to enter your password (for sudo)"
+    echo "You might be prompted to enter your password (for sudo)"
     echo " "
     echo " "
 

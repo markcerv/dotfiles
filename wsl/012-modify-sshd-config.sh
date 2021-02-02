@@ -31,13 +31,50 @@ else
 fi
 
 echo " ---- Port section ----"
-found=`egrep '^Port 22$' $FILE`
+found=`egrep '^#Port 22$' $FILE`
 if [ "$found" ]; then
-    echo "Updating Port from 22 to 2220"
-    sudo sed -i 's/^Port 22$/Port 2220/' $FILE
+    echo "Uncommenting and Updating Port from 22 to 2220"
+    sudo sed -i 's/^#Port 22$/Port 2220/' $FILE
 else
-    echo "This is what the port is set to in $FILE:"
-    egrep '^Port' $FILE
+    found=`egrep '^Port 22$' $FILE`
+    if [ "$found" ]; then
+        echo "Updating Port from 22 to 2220"
+        sudo sed -i 's/^Port 22$/Port 2220/' $FILE
+    else
+        echo "This is what the port is set to in $FILE:"
+        egrep '^Port' $FILE
+    fi
+fi
+
+CHECK_FOR="/etc/ssh/ssh*key*"
+if ls $CHECK_FOR 1> /dev/null 2>&1; then
+    echo "$CHECK_FOR files DO exist"
+else
+    echo " "
+    echo "********** WARNING **********"
+    echo "$CHECK_FOR files DO NOT exist"
+    echo "********** WARNING **********"
+    echo " " 
+    echo "You must run this first:"
+    echo "    sudo ssh-keygen -A"
+    echo " "
+    echo "                              (you have $SECS seconds to answer this question)"
+    read -r -t $SECS -p "Do you want to generate ssh keys w/ the above command? [y/N] " response
+
+    if [[ "$response" =~ ^(yes|y)$ ]]
+    then
+        echo "You might be prompted to enter your password (for sudo)"
+        echo " "
+        echo " "
+
+        ssh-keygen -A
+    else
+        echo " "
+        echo "Either you didn't answer, or you said no..."
+        echo "   ...doing nothing."
+        echo " "
+    fi
+
 fi
 
 
@@ -50,7 +87,7 @@ read -r -t $SECS -p "Do you want to resart ssh w/ the above commands? [y/N] " re
 
 if [[ "$response" =~ ^(yes|y)$ ]]
 then
-    echo "You might be propmted to enter your password (for sudo)"
+    echo "You might be prompted to enter your password (for sudo)"
     echo " "
     echo " "
 
