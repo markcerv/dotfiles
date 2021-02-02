@@ -17,4 +17,10 @@ This repo will hopefully be a living compendium of what I've done...and how it c
 
 ## Fresh WSL Environments
 
-* Fire up a distro (in my case, Ubuntu) via WSL and 
+* Fire up a distro (in my case, Ubuntu) via WSL and sign in for the first time, and create a password
+
+```
+bash <(curl -s https://raw.githubusercontent.com/markcerv/dotfiles/main/wsl/000-create-wsl-conf.sh)
+
+bash <(curl -s https://raw.githubusercontent.com/markcerv/dotfiles/main/wsl/010-update-unbuntu.sh)
+```
