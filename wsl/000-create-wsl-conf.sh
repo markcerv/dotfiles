@@ -2,6 +2,8 @@
 #
 # Create an /etc/wsl.conf file
 #
+# The options will allow for you to have file permissions that are NOT all RWX
+#
 
 FILE=/etc/wsl.conf
 TMP=/tmp/wsl.conf
